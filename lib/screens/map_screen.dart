@@ -28,6 +28,10 @@ class _MapScreenState extends State<MapScreen> {
     super.dispose();
   }
 
+  /*
+    TODO: Importante, ya se tiene al ultima ubicacion conocida
+    //Nuevas funciones
+   */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
