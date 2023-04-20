@@ -5,8 +5,10 @@ import 'package:flutter_maps_adv/screens/screens.dart';
 
 void main() {
   runApp(MultiBlocProvider(providers: [
+    //Dependencias que van en cascada
     BlocProvider(create: (context) => GpsBloc()),
     BlocProvider(create: (context) => LocaltionBloc()),
+    BlocProvider(create: (context) => MapBloc()),
   ], child: const MyApp()));
 }
 
