@@ -5,7 +5,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapView extends StatelessWidget {
   final LatLng initialLocation;
-  const MapView({super.key, required this.initialLocation});
+  final Set<Polyline> polylines;
+  MapView({super.key, required this.initialLocation, required this.polylines});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class MapView extends StatelessWidget {
           myLocationEnabled: true,
           zoomControlsEnabled: false,
           myLocationButtonEnabled: false,
+          polylines: polylines, //Hace que se vean las polilines
 
           //Para tener un control del mapa
           onMapCreated: (controller) =>

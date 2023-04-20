@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_maps_adv/blocs/blocs.dart';
 import 'package:flutter_maps_adv/views/map_view.dart';
 import 'package:flutter_maps_adv/widgets/btn_follow_user.dart';
+import 'package:flutter_maps_adv/widgets/btn_toggle_user_route.dart';
 import 'package:flutter_maps_adv/widgets/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -40,26 +41,45 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: BlocBuilder<LocaltionBloc, LocaltionState>(
-          builder: (context, state) {
-            if (state.lastKnownLocation == null) {
+          builder: (context, localtionState) {
+            if (localtionState.lastKnownLocation == null) {
               return const Center(
                   child: Text("No se ha encontrado la ubicación"));
             }
 
-            return SingleChildScrollView(
-              child: Stack(
-                children: [
-                  MapView(initialLocation: state.lastKnownLocation!),
-                  //TODO: BotonES....
-                ],
-              ),
+            return BlocBuilder<MapBloc, MapState>(
+              builder: (context, mapState) {
+                //Se esta realizando la copia de la lista de polylines
+                Map<String, Polyline> polylines = Map.from(mapState.polylines);
+
+                if (!mapState.showRoutePreview) {
+                  //Se remueve si solo si esta en false
+                  polylines.removeWhere((key, value) => key == 'myRoute');
+                }
+
+                return SingleChildScrollView(
+                  child: Stack(
+                    children: [
+                      MapView(
+                        initialLocation: localtionState.lastKnownLocation!,
+                        polylines: polylines.values.toSet(),
+                      ),
+                      //TODO: BotonES....
+                    ],
+                  ),
+                );
+              },
             );
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [BtnCurrentLocation(), BtnFollowUser()],
+          children: [
+            BtnToggleUserRoute(),
+            BtnCurrentLocation(),
+            BtnFollowUser()
+          ],
         ));
   }
 }

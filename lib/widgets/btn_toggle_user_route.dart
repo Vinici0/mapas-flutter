@@ -17,7 +17,7 @@ class BtnToggleUserRoute extends StatelessWidget {
           child: IconButton(
               icon: const Icon(Icons.more_horiz_rounded, color: Colors.black),
               onPressed: () {
-                // mapBloc.add( OnToggleUserRoute() );
+                mapBloc.add(OpToggleUserRouteEvent());
               })),
     );
   }
