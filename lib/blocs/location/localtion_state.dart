@@ -6,7 +6,7 @@ class LocaltionState extends Equatable {
   final List<LatLng> myLocationHistory;
 
   LocaltionState({
-    this.followingUser = false,
+    this.followingUser = true,
     this.lastKnownLocation,
     myLocationHistory,
   }) : myLocationHistory = myLocationHistory ?? [];

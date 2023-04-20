@@ -11,7 +11,7 @@ class GpsAccessScreen extends StatelessWidget {
     return Scaffold(
       body: Center(child: BlocBuilder<GpsBloc, GpsState>(
         builder: (context, state) {
-          print(state);
+          // print(state);
           return !state.isGpsEnabled ? _EnableGpsMessage() : _AccessButton();
         },
       )),

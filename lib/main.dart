@@ -8,7 +8,10 @@ void main() {
     //Dependencias que van en cascada
     BlocProvider(create: (context) => GpsBloc()),
     BlocProvider(create: (context) => LocaltionBloc()),
-    BlocProvider(create: (context) => MapBloc()),
+    //Se le envia la instancia del bloc de localizacion
+    BlocProvider(
+        create: (context) =>
+            MapBloc(locationBloc: BlocProvider.of<LocaltionBloc>(context))),
   ], child: const MyApp()));
 }
 

@@ -48,10 +48,9 @@ class LocaltionBloc extends Bloc<LocaltionEvent, LocaltionState> {
 
     try {
       final position = await Geolocator.getCurrentPosition();
-      print("getCurrentLocation - La ubicación actual es: $position");
+      // print("getCurrentLocation - La ubicación actual es: $position");
       add(OnNewUserLocationEvent(
           LatLng(position.latitude, position.longitude)));
-
       // TODO return LatLng from Google Maps API
       return position;
     } catch (e) {
@@ -68,7 +67,7 @@ class LocaltionBloc extends Bloc<LocaltionEvent, LocaltionState> {
       add(OnNewUserLocationEvent(
           LatLng(position.latitude, position.longitude)));
       print("");
-      print("startFollowingUser - La ubicación actual es: $position");
+      // print("startFollowingUser - La ubicación actual es: $position");
     });
   }
 

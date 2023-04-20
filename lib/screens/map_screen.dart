@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_maps_adv/blocs/blocs.dart';
 import 'package:flutter_maps_adv/views/map_view.dart';
+import 'package:flutter_maps_adv/widgets/btn_follow_user.dart';
 import 'package:flutter_maps_adv/widgets/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -58,7 +59,7 @@ class _MapScreenState extends State<MapScreen> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [BtnCurrentLocation()],
+          children: [BtnCurrentLocation(), BtnFollowUser()],
         ));
   }
 }

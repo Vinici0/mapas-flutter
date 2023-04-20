@@ -12,7 +12,7 @@ class MapView extends StatelessWidget {
     final mapBloc = BlocProvider.of<MapBloc>(context);
 
     final CameraPosition initialCameraPosition =
-        CameraPosition(target: initialLocation, zoom: 20);
+        CameraPosition(target: initialLocation, zoom: 10);
 
     //Dificiones de ka pantalla
     final size = MediaQuery.of(context).size;
@@ -20,20 +20,26 @@ class MapView extends StatelessWidget {
     return SizedBox(
       width: size.width,
       height: size.height,
-      child: GoogleMap(
-        initialCameraPosition: initialCameraPosition,
-        compassEnabled: false,
-        myLocationEnabled: true,
-        zoomControlsEnabled: false,
-        myLocationButtonEnabled: false,
+      child: Listener(
+        //El Widget Lisner es para escuchar eventos de la pantalla
+        onPointerMove: (pointerMoveEvent) =>
+            mapBloc.add(OnStopFollowingUserEvent()),
 
-        //Para tener un control del mapa
-        onMapCreated: (controller) =>
-            mapBloc.add(OnMapInitialzedEvent(controller)),
+        child: GoogleMap(
+          initialCameraPosition: initialCameraPosition,
+          compassEnabled: false,
+          myLocationEnabled: true,
+          zoomControlsEnabled: false,
+          myLocationButtonEnabled: false,
 
-        // TODO: Markers
-        // TODO: polylines
-        // TODO: Cuando se mueve el mapa
+          //Para tener un control del mapa
+          onMapCreated: (controller) =>
+              mapBloc.add(OnMapInitialzedEvent(controller)),
+
+          // TODO: Markers
+          // TODO: polylines
+          // TODO: Cuando se mueve el mapa
+        ),
       ),
     );
   }

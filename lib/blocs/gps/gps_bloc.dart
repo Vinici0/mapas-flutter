@@ -30,8 +30,8 @@ class GpsBloc extends Bloc<GpsEvent, GpsState> {
     final gpsInitState =
         await Future.wait([_checkGpsPermission(), _isPermissionGranted()]);
 
-    print("El estado del gps es: ${gpsInitState[0]}" +
-        "y el permiso es: ${gpsInitState[1]}");
+    // print("El estado del gps es: ${gpsInitState[0]}" +
+    //     "y el permiso es: ${gpsInitState[1]}");
     //Dispara el evento
     add(GpsPermissionGranted(
         //El estado que este actualmente
